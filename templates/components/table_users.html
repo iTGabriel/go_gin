@@ -2,18 +2,26 @@
 <br>
 <h2>Listagem de usuários</h2>
 <br>
-<table class="table">
+<table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Nome</th>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="col-9">Nome</th>
+        <th scope="col" class="text-center">Opções</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="align-middle">
         {{ range $key, $value := .users }}
             <tr>
-                <td scope="row">{{ $key }}</td>
-                <td>{{ $value.Nome }}</td>
+                <th scope="row" class="text-center">{{ $value.ID }}</th>
+                <td >{{ $value.Nome }}</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-link">Editar</button>
+                    <form Action="/user/remove" method="post">
+                        <input name="id" value="{{ $value.ID }}" style="display:none">
+                        <button type="submit" class="btn btn-danger">Remover</button>
+                    </form>
+                </td>
             </tr>
         {{ end }}
     </tbody>

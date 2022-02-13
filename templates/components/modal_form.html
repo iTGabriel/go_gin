@@ -1,0 +1,26 @@
+{{ define "modal_form_new_user" }}
+  <div class="modal fade" id="form_modal" tabindex="-1" aria-labelledby="form_modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="form_modalLabel">Novo usuário</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form Action="/user/new" method="post">
+            <div class="modal-body">
+                <div class="mb-3 text-start">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input name="nome" type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+{{ end }}

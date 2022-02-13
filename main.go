@@ -49,5 +49,21 @@ func main() {
 		c.HTML(http.StatusOK, "users.html", gin.H{"title": page_detail.title, "desc": page_detail.desc, "users": &users})
 	})
 
+	// CREATE USER
+	router.POST("/user/new", func(c *gin.Context) {
+		nome := c.PostForm("nome")
+		log.Printf("POST ACT - %v", nome)
+		db.Create(&User{Nome: nome})
+		c.Redirect(http.StatusFound, "/users")
+	})
+
+	// DELETE USER
+	router.POST("/user/remove", func(c *gin.Context) {
+		user_id := c.PostForm("id")
+		log.Printf("User remove -- %v - %v", c.PostForm("id"), user_id)
+		db.Delete(&User{}, user_id)
+		c.Redirect(http.StatusFound, "/users")
+	})
+
 	router.Run(":8000")
 }
