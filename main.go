@@ -7,10 +7,23 @@ import (
 )
 
 func main() {
+
+	page_detail := struct {
+		title string
+		desc  string
+	}{title: "Goglang - Gin", desc: "CRUD"}
+
 	router := gin.Default()
-	router.LoadHTMLGlob("templates/*")
+
+	router.LoadHTMLGlob("templates/**/*")
+
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{"title": "Teste", "desc": "Gin - Goglang framework"})
+		c.HTML(http.StatusOK, "index.html", gin.H{"title": page_detail.title, "desc": page_detail.desc})
 	})
-	router.Run(":8080")
+
+	router.GET("/users", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "users.html", gin.H{"title": page_detail.title, "desc": page_detail.desc, "test": "a"})
+	})
+
+	router.Run(":8000")
 }
